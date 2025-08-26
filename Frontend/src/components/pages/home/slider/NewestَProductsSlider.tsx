@@ -71,10 +71,10 @@ const NewestProductsSlider: React.FC = () => {
               <ShopingCard
                 title={product.title}
                 price={product.price}
-                primaryImage={product.primaryImage}
-                additionalImages={product.additionalImages}
-                _id={product._id}
-                tags={product.tags}
+                // primaryImage={product.primaryImage}
+                // additionalImages={product.additionalImages}
+                _id={product._id ?? ""}
+                // tags={product.tags}
                 averageRating={product.averageRating}
               />
             </SwiperSlide>
