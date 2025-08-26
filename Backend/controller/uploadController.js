@@ -72,11 +72,11 @@
 // };
 
 const multer = require("multer");
-const path = require("path");
 const shortId = require("shortid");
 const Image = require("../models/Image");
+const path = require("path");
 
-// استفاده از memoryStorage به جای diskStorage
+// فقط حافظه (RAM) برای فایل استفاده می‌کنیم
 const storage = multer.memoryStorage();
 const upload = multer({ storage }).single("upload");
 
@@ -94,7 +94,7 @@ exports.UploadWeblogImage = async (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    // تولید یه اسم یونیک تستی
+    // فقط یه اسم یونیک تولید می‌کنیم، فایل روی دیسک ذخیره نمی‌شه
     const fileExt = path.extname(req.file.originalname);
     const baseName = path.basename(req.file.originalname, fileExt);
     const imageName = `${baseName}-${shortId()}${fileExt}`;
@@ -102,13 +102,12 @@ exports.UploadWeblogImage = async (req, res) => {
     try {
       await Image.create({
         imageName,
-        // این لینک واقعی نیست، فقط برای تست
-        direction: `https://api.kermanatari.ir/uploads/weblog/${imageName}`,
+        direction: `https://api.kermanatari.ir/uploads/weblog/${imageName}`, // صرفاً تستی
       });
 
       return res.status(201).json({
         uploaded: true,
-        url: `https://api.kermanatari.ir/uploads/weblog/${imageName}`, // لینک صرفاً تستی
+        url: `https://api.kermanatari.ir/uploads/weblog/${imageName}`, // صرفاً تستی
       });
     } catch (err) {
       console.log(err);
