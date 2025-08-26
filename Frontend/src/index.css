@@ -1,0 +1,331 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Setting clamp for each heading tag */
+h1 {
+  font-size: clamp(2rem, 5vw + 1rem, 3rem);
+  font-weight: bolder;
+  color: #062348;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 2vw + 0.5rem, 2.5rem);
+  font-weight: bold;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw + 0.25rem, 2rem);
+  font-weight: bold;
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2.5vw + 0.5rem, 1.5rem);
+}
+
+h5 {
+  font-size: clamp(1.1rem, 2vw + 0.5rem, 1rem);
+}
+
+h6 {
+  font-size: clamp(1rem, 1.5vw + 0.5rem, 0.75rem);
+}
+
+/* Setting clamp for paragraph tags */
+p {
+  font-size: clamp(0.25rem, 0.75vw + 0.5rem, 1rem);
+}
+span {
+  font-size: clamp(0.2rem, 0.75vw + 0.5rem, 0.75rem);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "vazir", Courier, monospace;
+}
+body {
+  background-color: #fdfafa;
+}
+.fixedImage {
+  background-image: url("./assets/Off picture.png");
+  background-size: 60%; /* or contain, or specific dimensions */
+  background-position: left;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+}
+/* card Animation */
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* align-items: flex-end; */
+  perspective: 2500px;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wrapper {
+  transition: all 0.5s;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.card:hover .wrapper {
+  transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+  box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+.wrapper::before,
+.wrapper::after {
+  content: "";
+  opacity: 0;
+  width: 100%;
+  height: 60px;
+  transition: all 0.5s;
+  position: absolute;
+  left: 0;
+}
+.wrapper::before {
+  top: 0;
+  height: 100%;
+  background-image: linear-gradient(
+    to top,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+.wrapper::after {
+  bottom: 0;
+  opacity: 1;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+
+.card:hover .wrapper::before,
+.wrapper::after {
+  opacity: 1;
+}
+
+.card:hover .wrapper::after {
+  height: 120px;
+}
+.title {
+  width: 100%;
+  transition: transform 0.5s;
+  transform: translateY(65%);
+}
+.card:hover .title {
+  transform: translate3d(0%, 50%, 100px);
+  visibility: hidden;
+}
+
+.character {
+  width: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  /* position: absolute; */
+  z-index: -1;
+}
+
+.card:hover .character {
+  opacity: 1;
+  transform: translate3d(0%, 2%, -1000px);
+  z-index: 10;
+}
+
+/* No Arrrows */
+.no-arrows {
+  /* Remove the default arrow buttons */
+  -moz-appearance: textfield;
+}
+
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* ? shaow */
+.shadowhand {
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+/* ? hover card */
+.divhover {
+  position: relative; /* Ensures proper positioning of child elements */
+  overflow: hidden; /* Prevents overflow of images */
+}
+
+.primaryImage {
+  display: block; /* Ensures the image is displayed */
+  height: 30vh; /* Set your desired height */
+  opacity: 1; /* Fully visible */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for opacity and transform */
+}
+
+.secondImage {
+  display: block; /* Change to block so it can be animated */
+  height: 0; /* Start with height 0 */
+  opacity: 0; /* Start with 0 opacity */
+  transition: height 0.5s ease, opacity 0.5s ease, transform 0.5s ease; /* Smooth transitions */
+  transform: translateY(10px); /* Start slightly lower */
+}
+
+.divhover:hover .primaryImage {
+  opacity: 0; /* Fade out the primary image */
+  transform: translateY(-10px); /* Move the primary image up */
+}
+
+.divhover:hover .secondImage {
+  height: 35vh; /* Full height on hover */
+  border-radius: 10%;
+  opacity: 1; /* Fade in the second image */
+  transform: translateY(0); /* Move to its original position */
+  padding: 15px;
+}
+
+/* 404 */
+.emoji-404 {
+  position: relative;
+  animation: mymove 2.5s infinite;
+}
+
+@keyframes mymove {
+  33% {
+    top: 0px;
+  }
+  66% {
+    top: 20px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+/* account games card */
+.accountgames-background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s ease-in-out;
+}
+
+
+
+/* Default styles for larger screens */
+.scale-bg {
+  width: 100%;
+  height: 100%;
+  transform: translateY(60%);
+  transition: transform 0.4s ease-in-out;
+}
+
+.accountgames-background:hover .scale-bg {
+  transform: translateY(0%);
+}
+
+/* Override for small screens */
+@media (max-width: 640px) {
+  .scale-bg {
+    width: 100%;
+    height: 100%;
+    transform: translateY(0); /* Reset transform for smaller screens */
+  }
+}
+
+/* !header btn */
+
+.button {
+  --main-color: rgb(176, 166, 247);
+  --main-bg-color: rgba(158, 102, 242, 0.36);
+  --pattern-color: rgba(46, 213, 116, 0.073);
+
+  filter: hue-rotate(0deg);
+
+  cursor: pointer;
+  text-transform: uppercase;
+  background: radial-gradient(
+      circle,
+      var(--main-bg-color) 0%,
+      rgba(0, 0, 0, 0) 95%
+    ),
+    linear-gradient(var(--pattern-color) 1px, transparent 1px),
+    linear-gradient(to right, var(--pattern-color) 1px, transparent 1px);
+  background-size:
+    cover,
+    15px 15px,
+    15px 15px;
+  background-position:
+    center center,
+    center center,
+    center center;
+  border-image: radial-gradient(
+      circle,
+      var(--main-color) 0%,
+      rgba(0, 0, 0, 0) 100%
+    )
+    1;
+  border-width: 1px 0;
+  color: var(--main-color);
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  transition: background-size 0.2s ease-in-out;
+}
+
+/* Responsive adjustments */
+/* @media (max-width: 768px) {
+  .button {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+} */
+
+
+.button:hover {
+  background-size:
+    cover,
+    10px 10px,
+    10px 10px;
+}
+.button:active {
+  filter: hue-rotate(250deg);
+}
+
+/* !دکمه عملیات داشبورد */
+@keyframes dropdownOpen {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-dropdown-open {
+  animation: dropdownOpen 0.3s ease-out forwards;
+}

@@ -1,0 +1,59 @@
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  top: 10px;
+}
+.toggle span {
+  position: absolute;
+  width: 20px;
+  height: 4px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  transition: 0.5s;
+  left: 1px;
+}
+
+.toggle span:nth-child(1) {
+  transform: translateY(10px);
+  width: 30px;
+  left: 1px;
+}
+
+.toggle span:nth-child(2) {
+  transform: translateY(-10px);
+  width: 30px;
+  left: 1px;
+}
+.toggle span:nth-child(3) {
+  transform: translateY(0px);
+  width: 30px;
+  left: 1px;
+}
+
+.active span:nth-child(3) {
+  transform: translateX(60px);
+}
+
+.active span:nth-child(1) {
+  width: 40px;
+  transform: translateY(0px) rotate(45deg);
+}
+.active span:nth-child(2) {
+  width: 40px;
+  transform: translateY(0px) rotate(-45deg);
+}
+.helper{
+  visibility: hidden;
+  transform: translateY(0);
+}
+
+.icon:hover .helper{
+  visibility: visible;
+  transition: all ease-in-out 0.5s;
+  transform: translateY(35px);
+}
