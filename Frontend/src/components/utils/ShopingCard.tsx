@@ -6,12 +6,11 @@ interface ShopingCardProps {
   title: string;
   price: number | string;
   _id: string;
-  // primaryImage?: string;
-  // additionalImages?: string[];
-  // averageRating?: number;
-  // tags?: string[];
+  primaryImage?: string;
+  additionalImages?: string[];
+  averageRating?: number;
+  tags?: string[];
 }
-
 const ShopingCard: React.FC<ShopingCardProps> = ({ title, price, _id }) => {
   return (
     <div className="flex flex-col cursor-pointer">

@@ -84,10 +84,10 @@ const AllProducts: React.FC = () => {
                 <ShopingCard
                   title={product.title}
                   price={product.price}
-                  primaryImage={product.primaryImage} // ensure optimized and preloaded images
-                  additionalImages={product.additionalImages}
-                  _id={product._id}
-                  tags={product.tags}
+                  // primaryImage={product.primaryImage} // ensure optimized and preloaded images
+                  // additionalImages={product.additionalImages}
+                  _id={product._id ?? ""}
+                  // tags={product.tags}
                   averageRating={product.averageRating}
                 />
               </div>
