@@ -16,7 +16,7 @@ import {
   customerSchema,
   orderSchema,
 } from "../../../validations/CustomerAppValidation";
-import jsPDF from "jspdf";
+import {jsPDF} from "jspdf";
 
 import vazirFontBase64 from "../../utils/base copy"; // رشته Base64 فونت Vazir
 
