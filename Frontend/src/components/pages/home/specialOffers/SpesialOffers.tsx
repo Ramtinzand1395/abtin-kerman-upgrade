@@ -28,6 +28,7 @@ const SpesialOffers = () => {
   //   };
   //   getGames();
   // }, []);
+
   return (
     <div className="w-full flex items-center  shadow-2xl p-2">
       <div className="flex items-center justify-center ml-2 flex-col bg-primary rounded-lg h-[250px] md:h-auto p-2 md:p-5">
@@ -86,19 +87,19 @@ const SpesialOffers = () => {
           </SwiperSlide>
         ))} */}
         <SwiperSlide>
-          <ShopingCard />
+          <ShopingCard title="PS5 Slim" price="12,500,000" _id="1" />
         </SwiperSlide>
         <SwiperSlide>
-          <ShopingCard />
+          <ShopingCard title="PS4 Slim" price="12,500,000" _id="2" />
         </SwiperSlide>{" "}
         <SwiperSlide>
-          <ShopingCard />
+          <ShopingCard title="PS2 Slim" price="12,500,000" _id="3" />
         </SwiperSlide>{" "}
         <SwiperSlide>
-          <ShopingCard />
+          <ShopingCard title="PSOne Slim" price="12,500,000" _id="4" />
         </SwiperSlide>{" "}
         <SwiperSlide>
-          <ShopingCard />
+          <ShopingCard title="Xbox Slim" price="12,500,000" _id="5" />
         </SwiperSlide>
       </Swiper>
     </div>
