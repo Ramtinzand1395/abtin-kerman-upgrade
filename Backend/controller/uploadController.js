@@ -3,22 +3,37 @@ const path = require("path");
 const shortId = require("shortid");
 const Image = require("../models/Image");
 
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     const uploadDir = path.resolve(__dirname, "../public/uploads/weblog"); // Resolve the path relative to the current script file
+//     cb(null, uploadDir);
+//   },
+//   filename: function (req, file, cb) {
+//     const fileExt = path.extname(file.originalname); // Get the file extension
+//     const baseName = path.basename(file.originalname, fileExt); // Get the filename without the extension
+//     const uniqueName = baseName + "-" + shortId() + fileExt; // Combine filename + shortId + filetype
+//     cb(null, uniqueName);
+//   },
+// });
+
+// const upload = multer({
+//   storage: storage,
+// }).single("upload");
+// !vercel
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = path.resolve(__dirname, "../public/uploads/weblog"); // Resolve the path relative to the current script file
-    cb(null, uploadDir);
+    cb(null, "/tmp"); // فقط روی Vercel قابل نوشتن
   },
   filename: function (req, file, cb) {
-    const fileExt = path.extname(file.originalname); // Get the file extension
-    const baseName = path.basename(file.originalname, fileExt); // Get the filename without the extension
-    const uniqueName = baseName + "-" + shortId() + fileExt; // Combine filename + shortId + filetype
+    const fileExt = path.extname(file.originalname);
+    const baseName = path.basename(file.originalname, fileExt);
+    const uniqueName = baseName + "-" + shortId() + fileExt;
     cb(null, uniqueName);
   },
 });
 
-const upload = multer({
-  storage: storage,
-}).single("upload");
+const upload = multer({ storage }).single("upload");
+
 
 exports.UploadWeblogImage = async (req, res) => {
   upload(req, res, async function (err) {
