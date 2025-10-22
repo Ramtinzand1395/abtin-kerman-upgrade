@@ -59,7 +59,7 @@ const senSMS = ({ bodyId, to, args }) => {
 // ? @desc get all orders (ADMIN ONLY)
 // ? @access private/Admin
 
-router.get("/all-orders",auth,issuperAdmin, async (req, res) => {
+router.get("/all-orders", auth, issuperAdmin, async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
 
   try {
@@ -210,6 +210,49 @@ router.put("/:orderId", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("server error");
+  }
+});
+// !NEW
+router.put("/nosms/:orderId", async (req, res) => {
+   const { orderId } = req.params;
+
+  try {
+    const order = await Order.findOne({ _id: orderId }).populate("customer");
+    if (!order) {
+      return res.status(400).json({ message: "سفارشی پیدا نشد." });
+    }
+
+    let deliveryDate = null;
+
+    order.deliveryStatus = "تحویل به مشتری";
+
+    deliveryDate = moment().format("jYYYY/jMM/jDD HH:mm");
+    order.deliveryDate = deliveryDate;
+
+    await order.save();
+
+    return res
+      .status(200)
+      .json({ message: "سفارش بدون پیام تغییر کرد.", Data: order });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("server error");
+  }
+});
+router.delete("/deleteOrder/:orderId", async (req, res) => {
+  const { orderId } = req.params;
+
+  try {
+    const order = await Order.findByIdAndDelete(orderId);
+
+    if (!order) {
+      return res.status(404).json({ message: "سفارشی پیدا نشد." });
+    }
+
+    return res.status(200).json({ message: "سفارش با موفقیت حذف شد.", Data: order });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("خطای سرور");
   }
 });
 

@@ -51,10 +51,10 @@ type UserInfoProps = {
   userInfo: User;
   userId: string;
 };
-// const SERVER_URL = "http://localhost:5000/api";
+const SERVER_URL = "http://localhost:5000/api";
 // const SERVER_URL = "https://abtin-kerman-backend-new.vercel.app/api";
 // const SERVER_URL = "https://api.kermanatari.ir/api";
-const SERVER_URL = "https://abtincrossapp.vercel.app/api";
+// const SERVER_URL = "https://abtincrossapp.vercel.app/api";
 
 
 const token = localStorage.getItem("User");
@@ -566,8 +566,22 @@ export const updateCustomerInfo = (
 //* @desc  confirm comment
 //* @route POST http://localhost:5000/api/confirm-comment/:commentId
 export const updateOrderInfo = (orderId: string, userOrder: customerOrder) => {
+  console.log(orderId)
   const url = `${SERVER_URL}/order/${orderId}`;
   return axios.put(url, userOrder);
+};
+// !NEW
+//* @desc  confirm comment
+//* @route POST http://localhost:5000/api/confirm-comment/:commentId
+export const updateOrdernOsMS = (orderId: string, userOrder: customerOrder) => {
+  const url = `${SERVER_URL}/order/nosms/${orderId}`;
+  return axios.put(url, userOrder);
+};
+//* @desc  confirm comment
+//* @route POST http://localhost:5000/api/confirm-comment/:commentId
+export const deleteOrder = (orderId: string ) => {
+  const url = `${SERVER_URL}/order/deleteOrder/${orderId}`;
+  return axios.delete(url);
 };
 // !
 //* @desc  confirm comment

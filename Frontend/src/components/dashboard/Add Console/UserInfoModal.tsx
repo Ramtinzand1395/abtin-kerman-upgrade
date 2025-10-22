@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import {
+  deleteOrder,
   getCustomersOrders,
   print,
   updateCustomerInfo,
   updateOrderInfo,
+  updateOrdernOsMS,
 } from "../../../services/ApiServices";
 import { Customer, customerOrder } from "../../../types";
 import GameDropdownEdite from "./GameDropdownEdite";
@@ -16,7 +18,7 @@ import {
   customerSchema,
   orderSchema,
 } from "../../../validations/CustomerAppValidation";
-import {jsPDF} from "jspdf";
+import { jsPDF } from "jspdf";
 
 import vazirFontBase64 from "../../utils/base copy"; // رشته Base64 فونت Vazir
 
@@ -119,9 +121,7 @@ const UserInfoModal: React.FC<Props> = ({
       }
       lines.push({ text: "===========================", align: "right" });
       lines.push({
-        text: `توضیحات: ${
-          userOrder.description ||""
-        }`,
+        text: `توضیحات: ${userOrder.description || ""}`,
         align: "right",
       });
     }
@@ -191,6 +191,38 @@ const UserInfoModal: React.FC<Props> = ({
     setUserOrder((prev) =>
       prev ? { ...prev, [field]: e.target.value } : prev
     );
+  };
+  // !New
+  const HandleDeleteOrder = async () => {
+    if (!orderId) return;
+
+    const confirmDelete = window.confirm("آیا از حذف سفارش مطمئنی؟");
+    if (!confirmDelete) return;
+    try {
+      const { data, status } = await deleteOrder(orderId);
+      if (status === 200) {
+        toast.success(data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const HandleNoSms = async () => {
+    if (!orderId || !userOrder) return;
+    const confirmNoSms = window.confirm(
+      "آیا از انجام عملیات بدون پیام مطمئنی؟"
+    );
+
+    if (!confirmNoSms) return;
+    try {
+      const { data, status } = await updateOrdernOsMS(orderId, userOrder);
+      if (status === 200) {
+        toast.success(data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleSaveCustomer = async (userId: string) => {
@@ -521,7 +553,20 @@ const UserInfoModal: React.FC<Props> = ({
                 ذخیره
               </button>
             )}
+            <button
+              onClick={HandleDeleteOrder}
+              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+            >
+              حذف سفارش
+            </button>
+            <button
+              onClick={HandleNoSms}
+              className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition"
+            >
+              ذخیره بدون پیام
+            </button>
           </div>
+
           {saving && <Spiner />}
         </div>
         <button
