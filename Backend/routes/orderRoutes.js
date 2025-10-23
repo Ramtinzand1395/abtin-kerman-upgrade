@@ -214,7 +214,7 @@ router.put("/:orderId", async (req, res) => {
 });
 // !NEW
 router.put("/nosms/:orderId", async (req, res) => {
-   const { orderId } = req.params;
+  const { orderId } = req.params;
 
   try {
     const order = await Order.findOne({ _id: orderId }).populate("customer");
@@ -241,15 +241,16 @@ router.put("/nosms/:orderId", async (req, res) => {
 });
 router.delete("/deleteOrder/:orderId", async (req, res) => {
   const { orderId } = req.params;
-
-  try {
+   try {
     const order = await Order.findByIdAndDelete(orderId);
 
     if (!order) {
       return res.status(404).json({ message: "سفارشی پیدا نشد." });
     }
 
-    return res.status(200).json({ message: "سفارش با موفقیت حذف شد.", Data: order });
+    return res
+      .status(200)
+      .json({ message: "سفارش با موفقیت حذف شد.", Data: order });
   } catch (err) {
     console.error(err);
     res.status(500).send("خطای سرور");
