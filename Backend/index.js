@@ -8,6 +8,7 @@ const connectDB = require("./config/db");
 // const cookieSession = require("cookie-session");
 // const passport = require("passport");
 // const passportSetup = require("./passport");
+console.log("first")
 const app = express();
 
 //* Load Config
