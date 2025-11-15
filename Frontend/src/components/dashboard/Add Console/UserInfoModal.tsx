@@ -3,7 +3,6 @@ import { FaTimes } from "react-icons/fa";
 import {
   deleteOrder,
   getCustomersOrders,
-  getprint,
   print,
   updateCustomerInfo,
   updateOrderInfo,
