@@ -667,3 +667,9 @@ export const print = (formData: FormData) => {
     },
   });
 };
+
+export const getprint = () => {
+  const url = `${SERVER_URL}/printer/print`;
+
+  return axios.get(url);
+};

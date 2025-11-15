@@ -13,10 +13,11 @@ router.post("/print", upload.single("file"), async (req, res) => {
     const fileBuffer = fs.readFileSync(filePath);
     const base64Content = fileBuffer.toString("base64");
 
+    console.log(process.env.API_KEY)
     const response = await axios.post(
       "https://api.printnode.com/printjobs",
       {
-        printerId: 74523622,
+        printerId: 74910088,
         title: "Test PDF Print",
         contentType: "pdf_base64",
         content: base64Content,
@@ -50,7 +51,26 @@ router.post("/print", upload.single("file"), async (req, res) => {
   }
 });
 
+router.get("/print", async (req, res) => {
+  try {
+    const { data } = await axios.get("https://api.printnode.com/printers", {
+      auth: { username: process.env.API_KEY, password: "" },
+    });
+
+    console.log(data); // لیست پرینترها در ترمینال
+    res.json({ success: true, printers: data }); // خروجی برای فرانت
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    res.status(500).json({
+      error: "خطا در دریافت لیست پرینترها",
+      details: err.response?.data || err.message,
+    });
+  }
+});
+
 module.exports = router;
+
+
 
 // const express = require("express");
 // const axios = require("axios");

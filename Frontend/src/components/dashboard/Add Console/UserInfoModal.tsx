@@ -3,6 +3,7 @@ import { FaTimes } from "react-icons/fa";
 import {
   deleteOrder,
   getCustomersOrders,
+  getprint,
   print,
   updateCustomerInfo,
   updateOrderInfo,
@@ -147,7 +148,8 @@ const UserInfoModal: React.FC<Props> = ({
       formData.append("file", pdfBlob, "ticket.pdf");
 
       const res = await print(formData);
-
+      // const data = await getprint();
+      // console.log(data);
       if (res.status === 200) {
         toast.success("فایل برای چاپ ارسال شد.");
       } else {
