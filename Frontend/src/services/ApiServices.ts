@@ -52,9 +52,9 @@ type UserInfoProps = {
   userId: string;
 };
 // const SERVER_URL = "http://localhost:5000/api";
-// const SERVER_URL = "https://abtin-kerman-backend-new.vercel.app/api";
+const SERVER_URL = "https://abtin-kerman-backend-new.vercel.app/api";
 // const SERVER_URL = "https://api.kermanatari.ir/api";
-const SERVER_URL = "https://abtincrossapp.vercel.app/api";
+// const SERVER_URL = "https://abtincrossapp.vercel.app/api";
 
 
 const token = localStorage.getItem("User");
